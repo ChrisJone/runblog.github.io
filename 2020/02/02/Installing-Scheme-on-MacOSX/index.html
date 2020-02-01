@@ -161,7 +161,7 @@
 <meta property="og:description" content="Installing Scheme on Mac OS X Scheme是Lisp的一种方言，也是SICP使用的语言，MIT-Scheme是MIT实现的Scheme解析器。接下来按照如下步骤安装Scheme…   下载  32位系统 http://ftp.gnu.org/gnu/mit-scheme/stable.pkg/9.2/mit-scheme-9.2-i386.dmg  64位系统 htt">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbh8b6mq2tj30yf0u0auw.jpg">
-<meta property="og:updated_time" content="2020-02-01T14:06:25.470Z">
+<meta property="og:updated_time" content="2020-02-01T14:19:04.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Installing-Scheme-on-MacOSX">
 <meta name="twitter:description" content="Installing Scheme on Mac OS X Scheme是Lisp的一种方言，也是SICP使用的语言，MIT-Scheme是MIT实现的Scheme解析器。接下来按照如下步骤安装Scheme…   下载  32位系统 http://ftp.gnu.org/gnu/mit-scheme/stable.pkg/9.2/mit-scheme-9.2-i386.dmg  64位系统 htt">
@@ -425,7 +425,7 @@
                 
               
 
-              <time title="创建时间：2020-02-01 21:18:23 / 修改时间：14:06:25" itemprop="dateCreated datePublished" datetime="2020-02-01T21:18:23Z">2020-02-01</time>
+              <time title="创建时间：2020-02-01 21:18:23 / 修改时间：14:19:04" itemprop="dateCreated datePublished" datetime="2020-02-01T21:18:23Z">2020-02-01</time>
             
 
             
@@ -521,7 +521,9 @@
 <blockquote>
 <p>为了在能在命令行使用scheme，需要创建scheme的 软链接</p>
 </blockquote>
-<p>3.1. 创建软链接</p>
+</li>
+</ol>
+<p>  3.1. 创建软链接</p>
 <ul>
 <li><p>32位系统</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources /usr/local/lib/mit-scheme-i386</span><br></pre></td></tr></table></figure>
@@ -530,9 +532,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources /usr/local/lib/mit-scheme-x86-64</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-</ol>
-<p>   3.2.  Scheme命令</p>
+<p>  3.2. Scheme命令</p>
 <ul>
 <li><p>32位系统</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo ln -s /usr/local/lib/mit-scheme-i386/mit-scheme /usr/bin/scheme</span><br></pre></td></tr></table></figure>
@@ -541,23 +541,14 @@
 <ul>
 <li><p>64位系统</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo ln -s /usr/local/lib/mit-scheme-x86-64/mit-scheme /usr/bin/scheme</span><br></pre></td></tr></table></figure>
+<p><strong>Notes:</strong> </p>
+<p>Q1. 在执行上面命令的时候，会出现 Operation not permitted 的错误，这是因为OS X中引入了SIP特性即使加了<code>sudo</code>（也就是具有root权限）也无法修改系统级的目录，其中就包括了<code>/usr/bin</code>。要解决这个问题有两种做法：一种是比较不安全的就是关闭SIP，也就是rootless特性；另一种是将本要链接到<code>/usr/bin</code>下的改链接到<code>/usr/local/bin</code>下就好了。<br>所以上面的命令改为:</p>
 </li>
 </ul>
-<pre><code>**Notes:** 
-
-Q1. 在执行上面命令的时候，会出现 Operation not permitted 的错误，这是因为OS X中引入了SIP特性即使加了`sudo`（也就是具有root权限）也无法修改系统级的目录，其中就包括了`/usr/bin`。要解决这个问题有两种做法：一种是比较不安全的就是关闭SIP，也就是rootless特性；另一种是将本要链接到`/usr/bin`下的改链接到`/usr/local/bin`下就好了。
-
-所以上面的命令改为
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo ln -s /usr/local/lib/mit-scheme-x86-64/mit-scheme /usr/local/bin/scheme</span><br></pre></td></tr></table></figure>
-
-
-32位的相对应改下即可。
-
-Q2.如果执行完上面scheme还没生效的话，可以增加以下内容到 ~/.bash_profile
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> alias scheme="/Applications/MIT\:GNU\ Scheme.app/Contents/Resources/mit-scheme"</span><br></pre></td></tr></table></figure>
-</code></pre><p>引自：<a href="https://jacksonisaac.wordpress.com/2014/03/25/installing-scheme-on-mac-os-x/" target="_blank" rel="noopener">https://jacksonisaac.wordpress.com/2014/03/25/installing-scheme-on-mac-os-x/</a></p>
+<pre><code>$ sudo ln -s /usr/local/lib/mit-scheme-x86-64/mit-scheme /usr/local/bin/scheme
+</code></pre><p>   ​    32位的相对应改下即可。<br>   ​     Q2.如果执行完上面scheme还没生效的话，可以增加以下内容到 ~/.bash_profile</p>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> alias scheme="/Applications/MIT\:GNU\ Scheme.app/Contents/Resources/mit-scheme"</span><br></pre></td></tr></table></figure>
+<p>引自：<a href="https://jacksonisaac.wordpress.com/2014/03/25/installing-scheme-on-mac-os-x/" target="_blank" rel="noopener">https://jacksonisaac.wordpress.com/2014/03/25/installing-scheme-on-mac-os-x/</a></p>
 <p>OK, let’s do it～～～</p>
 
       
