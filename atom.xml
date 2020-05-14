@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://runblog.cn/"/>
-  <updated>2020-02-01T14:19:04.561Z</updated>
+  <updated>2020-02-01T16:51:24.299Z</updated>
   <id>https://runblog.cn/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mysql源码调试环境搭建</title>
+    <link href="https://runblog.cn/2020/02/02/Mysql%E6%BA%90%E7%A0%81%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https://runblog.cn/2020/02/02/Mysql源码调试环境搭建/</id>
+    <published>2020-02-02T00:50:22.000Z</published>
+    <updated>2020-02-01T16:51:24.299Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Mysql源码调试环境搭建"><a href="#Mysql源码调试环境搭建" class="headerlink" title="Mysql源码调试环境搭建"></a>Mysql源码调试环境搭建</h1><p>1、源码下载<br>     git clone <a href="https://github.com/mysql/mysql-server.git" target="_blank" rel="noopener">https://github.com/mysql/mysql-server.git</a><br>2、boost 安装</p><pre><code>- 下载包- 通过brew 进行安装</code></pre><p>3、使用cmake进行编译<br>    ▪     cmake编译配置<br>    -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/Volumes/Transcend/download/<br>    ✓    DOWNLOAD_BOOST使用下载的tar包加载进行启动<br>    ✓    WITH_BOOST boost下载路径</p><pre><code>其他配置：  -DDOWNLOAD_BOOST=1-DWITH_BOOST=/Volumes/Transcend/download/-DWITH_SSL=system-DWITH_DEBUG=1-DCMAKE_INSTALL_PREFIX=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out-DMYSQL_DATADIR=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/data▪    配置文件my.cnf参考：log-error=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/log/log.errdatadir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/datapid-file=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/user.pidsocket=/tmp/mysql-3306.sockskip-grant-tablesinnodb_file_per_table=1port=33060transaction_isolation = READ-COMMITTED</code></pre><p>[client]</p><h1 id="客户端来源数据的默认字符集"><a href="#客户端来源数据的默认字符集" class="headerlink" title="客户端来源数据的默认字符集"></a>客户端来源数据的默认字符集</h1><p>default-character-set = utf8mb4<br>[mysqld]</p><h1 id="服务端默认字符集"><a href="#服务端默认字符集" class="headerlink" title="服务端默认字符集"></a>服务端默认字符集</h1><p>character-set-server=utf8mb4</p><h1 id="连接层默认字符集"><a href="#连接层默认字符集" class="headerlink" title="连接层默认字符集"></a>连接层默认字符集</h1><p>collation-server=utf8mb4_unicode_ci<br>[mysql]</p><h1 id="数据库默认字符集"><a href="#数据库默认字符集" class="headerlink" title="数据库默认字符集"></a>数据库默认字符集</h1><p>default-character-set = utf8mb4<br>    ▪    mysqld启动配置</p><pre><code> - 初始化（第一次）    --defaults-file=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/my.cnf --basedir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out --datadir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/data --initialize-insecure- 普通启动--defaults-file=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/my.cnf --basedir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out --datadir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/data▪    mysql客户端启动     ./cmake-build-debug/client/mysql -u root -h 127.0.0.1 -P33060</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Mysql源码调试环境搭建&quot;&gt;&lt;a href=&quot;#Mysql源码调试环境搭建&quot; class=&quot;headerlink&quot; title=&quot;Mysql源码调试环境搭建&quot;&gt;&lt;/a&gt;Mysql源码调试环境搭建&lt;/h1&gt;&lt;p&gt;1、源码下载&lt;br&gt;     git clone &lt;
+      
+    
+    </summary>
+    
+    
+      <category term="mysql" scheme="https://runblog.cn/tags/mysql/"/>
+    
+      <category term="mysql源码" scheme="https://runblog.cn/tags/mysql%E6%BA%90%E7%A0%81/"/>
+    
+  </entry>
   
   <entry>
     <title>Installing-Scheme-on-MacOSX</title>
