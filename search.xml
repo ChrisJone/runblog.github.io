@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Mysql源码调试环境搭建]]></title>
+    <url>%2F2020%2F02%2F02%2FMysql%E6%BA%90%E7%A0%81%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[Mysql源码调试环境搭建1、源码下载 git clone https://github.com/mysql/mysql-server.git2、boost 安装 - 下载包 - 通过brew 进行安装 3、使用cmake进行编译 ▪ cmake编译配置 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/Volumes/Transcend/download/ ✓ DOWNLOAD_BOOST使用下载的tar包加载进行启动 ✓ WITH_BOOST boost下载路径 其他配置： -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/Volumes/Transcend/download/ -DWITH_SSL=system -DWITH_DEBUG=1 -DCMAKE_INSTALL_PREFIX=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out -DMYSQL_DATADIR=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/data ▪ 配置文件my.cnf 参考： log-error=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/log/log.err datadir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/data pid-file=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/user.pid socket=/tmp/mysql-3306.sock skip-grant-tables innodb_file_per_table=1 port=33060 transaction_isolation = READ-COMMITTED [client] 客户端来源数据的默认字符集default-character-set = utf8mb4[mysqld] 服务端默认字符集character-set-server=utf8mb4 连接层默认字符集collation-server=utf8mb4_unicode_ci[mysql] 数据库默认字符集default-character-set = utf8mb4 ▪ mysqld启动配置 - 初始化（第一次） --defaults-file=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/my.cnf --basedir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out --datadir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/data --initialize-insecure - 普通启动 --defaults-file=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/my.cnf --basedir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out --datadir=/Volumes/Transcend/study-line/mysql/source/mysql-server/build_out/data ▪ mysql客户端启动 ./cmake-build-debug/client/mysql -u root -h 127.0.0.1 -P33060]]></content>
+      <tags>
+        <tag>mysql</tag>
+        <tag>mysql源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Installing-Scheme-on-MacOSX]]></title>
+    <url>%2F2020%2F02%2F02%2FInstalling-Scheme-on-MacOSX%2F</url>
+    <content type="text"><![CDATA[Installing Scheme on Mac OS X Scheme是Lisp的一种方言，也是SICP使用的语言，MIT-Scheme是MIT实现的Scheme解析器。接下来按照如下步骤安装Scheme… 下载 32位系统 http://ftp.gnu.org/gnu/mit-scheme/stable.pkg/9.2/mit-scheme-9.2-i386.dmg 64位系统 http://ftp.gnu.org/gnu/mit-scheme/stable.pkg/9.2/mit-scheme-9.2-x86-64.dmg 安装 双击dmg软件，将MIT/GNU S cheme.app拖到Application中 创建scheme命令 为了在能在命令行使用scheme，需要创建scheme的 软链接 3.1. 创建软链接 32位系统 1$ sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources /usr/local/lib/mit-scheme-i386 64位系统 1$ sudo ln -s /Applications/MIT\:GNU\ Scheme.app/Contents/Resources /usr/local/lib/mit-scheme-x86-64 3.2. Scheme命令 32位系统 1$ sudo ln -s /usr/local/lib/mit-scheme-i386/mit-scheme /usr/bin/scheme 64位系统 1$ sudo ln -s /usr/local/lib/mit-scheme-x86-64/mit-scheme /usr/bin/scheme Notes: Q1. 在执行上面命令的时候，会出现 Operation not permitted 的错误，这是因为OS X中引入了SIP特性即使加了sudo（也就是具有root权限）也无法修改系统级的目录，其中就包括了/usr/bin。要解决这个问题有两种做法：一种是比较不安全的就是关闭SIP，也就是rootless特性；另一种是将本要链接到/usr/bin下的改链接到/usr/local/bin下就好了。所以上面的命令改为: $ sudo ln -s /usr/local/lib/mit-scheme-x86-64/mit-scheme /usr/local/bin/scheme ​ 32位的相对应改下即可。 ​ Q2.如果执行完上面scheme还没生效的话，可以增加以下内容到 ~/.bash_profile 1$ alias scheme="/Applications/MIT\:GNU\ Scheme.app/Contents/Resources/mit-scheme" 引自：https://jacksonisaac.wordpress.com/2014/03/25/installing-scheme-on-mac-os-x/ OK, let’s do it～～～]]></content>
+      <categories>
+        <category>lisp</category>
+      </categories>
+      <tags>
+        <tag>lisp</tag>
+        <tag>scheme</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[优雅的使用Sourcegraph研读git代码]]></title>
+    <url>%2F2019%2F09%2F17%2Fgit%2Fsource-graph%2F</url>
+    <content type="text"><![CDATA[优雅的使用Sourcegraph研读git代码 知名流行的代码查看工具 Sourcegraph 日前已宣布开源(Apache License)，代码托管在 GitHub 上 https://github.com/sourcegraph/sourcegraph。Sourcegraph 被大众广为熟知正是因为它支持在 GitHub 上轻松浏览和搜索代码，Sourcegraph 这款 Chrome或者Firefox 插件称得上是开发者必备的插件，它可以让我们像使用 IDE 一样浏览和搜索 GitHub 代码。 Sourcegraph 是一款能够根据语义来把 Web 上的开源代码编入索引的代码搜索浏览工具。你可以从代码仓库和安装包，甚至是函数里搜索代码，同时也可以直接点击被完全创建了链接的代码来阅读文档、跳转到变量定义或者马上找到可用的 Demo。总而言之，你可以在你的 Web 浏览器上完成这一切，而不需要配置任何编辑器。由 Sourcegraph 出品的这款 Chrome 插件，可以非常方便地浏览和搜索 GitHub 上的代码，持跨仓库(repository)搜索、跳转到定义、查找引用等功能，宛若一个功能强大的 IDE。核心功能如跳转到定义(Go-to-definition) —— 浏览文件或查看 pull 请求时，将鼠标悬停在代码上可以查看文档提示，单击即可跳转到定义、查找引用或全文搜索。 安装 sourcegraph 默认的端口为7080，使用docker来安装，脚本如下： 1&gt; docker run --publish 7080:7080 --publish 2633:2633 --rm --volume ~/.sourcegraph/config:/etc/sourcegraph --volume ~/.sourcegraph/data:/var/opt/sourcegraph sourcegraph/server:3.7.2 打开链接：http://localhost:7080 ,使用邮箱创、密码创建账号登陆即可 配置登陆 首次启动之后会有提示，注册用户默认做为管理员 token配置 添加External services Github token 点击 https://github.com/settings/tokens/new?scopes=repo&amp;description=Sourcegraph 链接去到github上面增加token，并把生成的token贴到External Service配置里面即可 repositoryQuery repo的查询搜索方式，可以参考github的查询方式 https://help.github.com/en/articles/searching-for-repositories 12345"repositoryQuery": [ "org:sourcegraph", "org:golang", "org:netty" // set this to "none" to disable querying ], orgs: 列出你想要研读代码repo的组织organizations 123456 "orgs": [ "spring", "sourcegraph", "golang", "netty"], repos:代码源，例子如下： 12345"repos": [ "sourcegraph/sourcegraph", "golang/go", "netty/netty"] exclude:Repositories to exclude (overrides repositories from repositoryQuery, orgs, and repos) 展示]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>代码查看工具</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[开发资料收集]]></title>
+    <url>%2F2018%2F09%2F17%2F%E5%BC%80%E5%8F%91%E8%B5%84%E6%96%99%E6%94%B6%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[开发资料收集前端开发 favico图标生成： 推荐工具：https://realfavicongenerator.net 它提供iOS、Android、网页版ico各类图片的生成]]></content>
+      <categories>
+        <category>开发</category>
+      </categories>
+      <tags>
+        <tag>前端开发</tag>
+        <tag>favico</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+</search>
